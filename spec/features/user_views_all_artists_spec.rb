@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.feature "User visits artist index" do
-  scenario "displays links to individual artists pages" do
-    Artist.create(name: "Bob", image_path: "http://cps-static.rovicorp.com/3/JPG_400/MI0003/146/MI0003146038.jpg")
-    Artist.create(name: "Jerry", image_path: "http://cps-static.rovicorp.com/3/JPG_400/MI0003/146/MI0003146038.jpg")
-    artists = Artist.all
+RSpec.feature "User views all artists" do
+  scenario "they see the names of each artist" do
+    artists = %w(Bob Adele Beyonce).map do |artist_name|
+      Artist.create(name: artist_name, image_path: "http://cps-static.rovicorp.com/3/JPG_400/MI0003/146/MI0003146038.jpg")
+    end
 
     visit artists_path
 

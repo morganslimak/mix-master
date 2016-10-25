@@ -7,10 +7,6 @@ class ArtistsController < ApplicationController
     @artist = Artist.new
   end
 
-  def edit
-    @artist = Artist.find(params[:id])
-  end
-
   def create
     @artist = Artist.new(artist_params)
     if @artist.save
@@ -21,6 +17,10 @@ class ArtistsController < ApplicationController
   end
 
   def show
+    @artist = Artist.find(params[:id])
+  end
+
+  def edit
     @artist = Artist.find(params[:id])
   end
 
@@ -35,13 +35,14 @@ class ArtistsController < ApplicationController
   end
 
   def destroy
-    Artist.find(params[:id]).destroy
+    @artist = Artist.find(params[:id])
+    @artist.destroy
     redirect_to artists_path
   end
 
-  private
+private
 
   def artist_params
-    params.require(:artist).permit(:name, :image_path)
+    params.require(:artist).permit(:name, :image_path)  
   end
 end
